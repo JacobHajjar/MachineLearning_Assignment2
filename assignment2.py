@@ -11,8 +11,8 @@ from sklearn.metrics import mean_squared_error, r2_score
 
 ''' develop the best predictive model based on the chemical engineering dataset'''
 
-__author__ = 'Jacob Hajjar, Michael-Ken Okolo, Vatsal Patel'
-__email__ = 'hajjarj@csu.fullerton.edu, michaelken.okolo1@csu.fullerton.edu, vatsal1224@csu.fullerton.edu'
+__author__ = 'Jacob Hajjar, Michael-Ken Okolo, Vatsal Patel, Ayush Bhatnagar '
+__email__ = 'hajjarj@csu.fullerton.edu, michaelken.okolo1@csu.fullerton.edu, vatsal1224@csu.fullerton.edu, ayush.bhatnagar@csu.fullerton.edu'
 __maintainer__ = 'jacobhajjar, michaelkenokolo'
 
 
