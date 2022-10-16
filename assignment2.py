@@ -75,7 +75,8 @@ def main():
         pc1_testing.append([pc1_val])
 
     # predict new value
-    print("\nPredict with testing data: {}, Real value: {}".format((pc1_training[500] * reg.coef_ + reg.intercept_), y_training[500]))
+    print("\nPredict with testing data: {}, Real value: {}".format((pc1_training[500] * reg.coef_ + reg.intercept_),
+                                                                   y_training[500]))
 
     # get the error for the prediction using PC1
     # predict the y values with PC1 for the training and testing data
