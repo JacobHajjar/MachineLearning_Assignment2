@@ -19,31 +19,32 @@ __maintainer__ = 'jacobhajjar, michaelkenokolo'
 def main():
     """the main function"""
     data_frame = pd.read_csv("Data1.csv")
-
     x_data = data_frame[["T", "P", "TC", "SV"]].to_numpy()
     y_data = data_frame["Idx"].to_numpy()
 
     # standardize data and estimate covariance matrix
     x_standardized_data = preprocessing.StandardScaler().fit_transform(x_data)
-
-    # verify standardized data
-    # for index in range(0, 4, 1):
-    #    print("{:.1f}".format(x_standardized_data[..., index].mean()))
-    #    print("{:.1f}".format(np.std(x_standardized_data[..., index])))
-
     cov_matrix = np.cov(x_data.T)
+    print("Covariance Matrix: \n{}\n".format(cov_matrix))
+
     # calculate eigenvalues and eigenvector
     eig_val, eig_vec = LA.eig(cov_matrix)
+    print("Eigenvalues: {} \nEigenvector: \n{}\n".format(eig_val, eig_vec))
 
     # find projection matrix
     proj_matrix = np.dot(x_standardized_data, eig_vec)
+    print("Projection Matrix: \n{}".format(proj_matrix))
 
     # component matrix and explained variance
-    print("\nExplained Variance:")
+    print("\nComponent Matrix and Explained Variance:")
     total_var = np.sum(eig_val)
     for index in range(0, 4, 1):
         percent_var = (eig_val[index] / total_var) * 100
         print("%var of PC", (index + 1), "is " + "{:.3f}: {}".format(percent_var, eig_vec[..., index]))
+
+    for index in range(0, 4, 1):
+        if eig_val.all() > np.mean(total_var):
+            print(proj_matrix[..., index])
 
     # separate 80% of the data to training
     testing_separation_index = math.floor(len(x_data) * 0.8)
