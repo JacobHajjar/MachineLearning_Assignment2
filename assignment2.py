@@ -1,20 +1,19 @@
 #!/usr/bin/env python3
 from pydoc import doc
-import sys
-import time
 import math
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from numpy import linalg as LA
 from sklearn import linear_model, preprocessing
-from sklearn.metrics import mean_squared_error, r2_score, explained_variance_score
+from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.decomposition import PCA
 
 ''' develop the best predictive model based on the chemical engineering dataset'''
 
-__author__ = 'Jacob Hajjar, Michael-Ken Okolo, Vatsal Patel, Ayush Bhatnagar '
-__email__ = 'hajjarj@csu.fullerton.edu, michaelken.okolo1@csu.fullerton.edu, vatsal1224@csu.fullerton.edu, ayush.bhatnagar@csu.fullerton.edu'
+__author__ = 'Jacob Hajjar, Michael-Ken Okolo, Vatsal Patel, Ayush Bhatnagar, Onkar Muttemwar'
+__email__ = 'hajjarj@csu.fullerton.edu, michaelken.okolo1@csu.fullerton.edu, vatsal1224@csu.fullerton.edu, ' \
+            'ayush.bhatnagar@csu.fullerton.edu, onkar.muttemwar@csu.fullerton.edu'
 __maintainer__ = 'jacobhajjar, michaelkenokolo'
 
 
@@ -78,7 +77,7 @@ def main():
     print(cumVarExplained)
     plt.subplots(figsize=(8, 6))
     plt.plot(nb_components, cumVarExplained, 'bo-')
-    plt.ylabel('Cumulative Explained Variance')
+    plt.ylabel('Explained Variance Ratio')
     plt.xlabel('Number of Components')
     plt.ylim([0.0, 1.1])
     plt.xticks(np.arange(1, len(nb_components) + 1, 1.0))
