@@ -55,6 +55,8 @@ def main():
     x_trained_pca = pca.fit_transform(x_standardized_data)
     explained_var = pca.explained_variance_ratio_
 
+    print(x_trained_pca)
+
     # cumulative sum of all the eigenvalues.
     cum_sum_eigenvalues = np.cumsum(explained_var)
     print("\nExplained Variance: {}".format(explained_var))
@@ -76,7 +78,18 @@ def main():
     plt.ylim([0.0, 1.1])
     plt.xticks(np.arange(1, len(nb_components) + 1, 1.0))
     plt.yticks(np.arange(0.0, 1.1, 0.10))
-    plt.show()
+    # plt.show()
+
+    # Kaiser criteria
+    # get the mean of the eigenvalues and check if each eigenvalue is greater than the mean
+    # kaiser_list = []
+    # eigen_mean = np.mean(eig_val)
+    # for i in range(0, 4, 1):
+    #    if (eigen_mean > eig_vec).any():
+    #        kaiser_list.append(eig_vec[i])
+    # print(kaiser_list)
+    svd = LA.svd(eig_vec, full_matrices=True, compute_uv=True, hermitian=False)
+    print(svd)
 
     # Problem 3.
     # separate 80% of the data to training
