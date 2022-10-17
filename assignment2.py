@@ -23,6 +23,7 @@ def main():
     x_data = data_frame[["T", "P", "TC", "SV"]].to_numpy()
     y_data = data_frame["Idx"].to_numpy()
 
+    # Problem 1.
     # standardize data and estimate covariance matrix
     x_standardized_data = preprocessing.StandardScaler().fit_transform(x_data)
     cov_matrix = np.cov(x_data.T)
@@ -48,14 +49,7 @@ def main():
         if eig_val.all() > np.mean(total_var):
             print(proj_matrix[..., index])
 
-    # separate 80% of the data to training
-    testing_separation_index = math.floor(len(x_data) * 0.8)
-    x_training = x_data[:testing_separation_index]
-    x_testing = x_data[testing_separation_index:]
-
-    y_training = y_data[:testing_separation_index]
-    y_testing = y_data[testing_separation_index:]
-
+    # Problem 2.
     # explained variance > 80%
     pca = PCA(n_components=4)
     x_trained_pca = pca.fit_transform(x_standardized_data)
@@ -83,6 +77,15 @@ def main():
     plt.xticks(np.arange(1, len(nb_components) + 1, 1.0))
     plt.yticks(np.arange(0.0, 1.1, 0.10))
     plt.show()
+
+    # Problem 3.
+    # separate 80% of the data to training
+    testing_separation_index = math.floor(len(x_data) * 0.8)
+    x_training = x_data[:testing_separation_index]
+    x_testing = x_data[testing_separation_index:]
+
+    y_training = y_data[:testing_separation_index]
+    y_testing = y_data[testing_separation_index:]
 
     # create pc scores for training data set
     pc1_training = []
