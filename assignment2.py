@@ -88,6 +88,17 @@ def main():
             kaiser_list.append(eig_val[i])
     print("Kaiser Criteria: {}".format(kaiser_list))
 
+    # Correlation matrix > 0.5
+    # corr_matrix = np.corrcoef(x_data.T, y_data)
+    num_pc = pca.n_features_
+    X_data_frame = data_frame.drop('Idx', axis=1)
+    loadings = pca.components_.T * np.sqrt(pca.explained_variance_)
+
+    pc_list = ["PC" + str(i) for i in list(range(1, num_pc + 1))]
+    corr_matrix = pd.DataFrame(loadings, columns=pc_list, index=X_data_frame.columns.values)
+    corr_matrix = corr_matrix.to_numpy()
+    print("\nCorrelation Matrix: \n{}".format(corr_matrix))
+
     # Problem 3.
     # separate 80% of the data to training
     testing_separation_index = math.floor(len(x_data) * 0.8)
