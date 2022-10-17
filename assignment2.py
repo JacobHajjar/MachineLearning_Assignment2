@@ -5,6 +5,7 @@ import time
 import math
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 from numpy import linalg as LA
 from sklearn import linear_model, preprocessing
 from sklearn.metrics import mean_squared_error, r2_score, explained_variance_score
@@ -65,6 +66,24 @@ def main():
     cum_sum_eigenvalues = np.cumsum(explained_var)
     print("\nExplained Variance: {}".format(explained_var))
     print("Cumulative Sum of Eigenvalues: {}".format(cum_sum_eigenvalues))
+
+    # graph the relationship between number of pca's and explained variance ratio.
+    cumVarExplained = []
+    nb_components = []
+    counter = 1
+    for i in explained_var:
+        cumVarExplained.append(explained_var[0:counter].sum())
+        nb_components.append(counter)
+        counter += 1
+    print(cumVarExplained)
+    plt.subplots(figsize=(8, 6))
+    plt.plot(nb_components, cumVarExplained, 'bo-')
+    plt.ylabel('Cumulative Explained Variance')
+    plt.xlabel('Number of Components')
+    plt.ylim([0.0, 1.1])
+    plt.xticks(np.arange(1, len(nb_components) + 1, 1.0))
+    plt.yticks(np.arange(0.0, 1.1, 0.10))
+    plt.show()
 
     # create pc scores for training data set
     pc1_training = []
