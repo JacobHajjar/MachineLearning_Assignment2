@@ -7,7 +7,8 @@ import pandas as pd
 import numpy as np
 from numpy import linalg as LA
 from sklearn import linear_model, preprocessing
-from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.metrics import mean_squared_error, r2_score, explained_variance_score
+from sklearn.decomposition import PCA
 
 ''' develop the best predictive model based on the chemical engineering dataset'''
 
@@ -42,6 +43,7 @@ def main():
         percent_var = (eig_val[index] / total_var) * 100
         print("%var of PC", (index + 1), "is " + "{:.3f}: {}".format(percent_var, eig_vec[..., index]))
 
+    # printing out projection matrix.
     for index in range(0, 4, 1):
         if eig_val.all() > np.mean(total_var):
             print(proj_matrix[..., index])
@@ -53,6 +55,16 @@ def main():
 
     y_training = y_data[:testing_separation_index]
     y_testing = y_data[testing_separation_index:]
+
+    # explained variance > 80%
+    pca = PCA(n_components=4)
+    x_trained_pca = pca.fit_transform(x_standardized_data)
+    explained_var = pca.explained_variance_ratio_
+
+    # cumulative sum of all the eigenvalues.
+    cum_sum_eigenvalues = np.cumsum(explained_var)
+    print("\nExplained Variance: {}".format(explained_var))
+    print("Cumulative Sum of Eigenvalues: {}".format(cum_sum_eigenvalues))
 
     # create pc scores for training data set
     pc1_training = []
