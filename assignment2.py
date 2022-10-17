@@ -83,11 +83,10 @@ def main():
     # get the mean of the eigenvalues and check if each eigenvalue is greater than the mean
     kaiser_list = []
     eigen_mean = np.mean(eig_val)
-    print(eigen_mean)
     for i in range(0, 4, 1):
         if eigen_mean < eig_val[i]:
             kaiser_list.append(eig_val[i])
-    print(kaiser_list)
+    print("Kaiser Criteria: {}".format(kaiser_list))
 
     # Problem 3.
     # separate 80% of the data to training
